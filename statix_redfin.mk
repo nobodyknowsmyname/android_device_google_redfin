@@ -9,7 +9,6 @@ INCLUDE_PIXEL_LAUNCHER := true
 
 # Inherit device configuration before the common GMS package set.
 $(call inherit-product, device/google/redfin/aosp_redfin.mk)
-$(call inherit-product, device/google/redbull/lineage_common.mk)
 include device/google/redfin/device-lineage.mk
 
 $(call inherit-product, vendor/gms/products/gms.mk)
