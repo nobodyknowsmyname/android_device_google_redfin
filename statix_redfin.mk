@@ -16,19 +16,14 @@ $(call inherit-product, vendor/statix/config/common.mk)
 $(call inherit-product, vendor/statix/config/gsm.mk)
 $(call inherit-product, vendor/google/redfin/redfin-vendor.mk)
 
-# The Android 14 redfin Google Battery HAL crashes on the Android 17
-# getStringProperty(DWELL_DEFEND, 0x12) request. This interface is optional;
-# use the standard health HAL until a compatible vendor implementation exists.
+# Google Battery HAL (vendor.google.google_battery-service) has been adapted
+# and patched to prevent SIGSEGV on Android 17 getStringProperty queries, enabling
+# stock Adaptive Charging (com.google.android.feature.ADAPTIVE_CHARGING).
 PRODUCT_PACKAGES := $(filter-out \
-    vendor.google.google_battery-V2-ndk \
-    vendor.google.google_battery-default.xml \
-    vendor.google.google_battery-service, \
+    android.hardware.contexthub-service.generic \
+    chre_daemon_msm, \
     $(PRODUCT_PACKAGES))
 
-PRODUCT_COPY_FILES := $(filter-out \
-    vendor/google/redfin/proprietary/vendor/etc/init/vendor.google.google_battery-default.rc:%/vendor/etc/init/vendor.google.google_battery-default.rc \
-    device/google/redbull/adaptivecharging.xml:%/etc/sysconfig/adaptivecharging.xml, \
-    $(PRODUCT_COPY_FILES))
 
 # StatiX and GMS customize the system image inherited from generic_system.
 PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS := false
