@@ -24,6 +24,11 @@ PRODUCT_PACKAGES := $(filter-out \
     chre_daemon_msm, \
     $(PRODUCT_PACKAGES))
 
+PRODUCT_COPY_FILES := $(filter-out \
+    vendor/google/redfin/proprietary/vendor/rfs/msm/mpss/readonly/vendor/mbn/mcfg_sw/mbn_sw.dig:% \
+    vendor/google/redfin/proprietary/vendor/rfs/msm/mpss/readonly/vendor/mbn/mcfg_sw/mbn_sw.txt:%, \
+    $(PRODUCT_COPY_FILES))
+
 
 # StatiX and GMS customize the system image inherited from generic_system.
 PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS := false
